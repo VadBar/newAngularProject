@@ -1,0 +1,49 @@
+<div class="page-title">
+  <h4>
+    Обзор за вчера (09.04.2018)
+    <a id="menu"><i class="material-icons black-text pointer" id="dashboard-info" (click)="showTarget()">info_outline</i></a>
+ </h4>
+</div>
+
+<div class="row" *ngIf="overview$ | async as o; else loader">
+  <div class="col s12 l3 l6">
+    <div class="card light-blue lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Выручка:</span>
+        <h3>{{o.gain.yersteday}} руб.</h3>
+        <h3 class=" m0 mb1" [ngClass]="{'green-text text-darken-2': o.gain.isHigh, 'red-text': !o.gain.isHigh}">
+          <i class="material-icons">{{o.gain.isHigh ? 'arrow_upward': 'arrow_downward'}}</i>
+          {{o.gain.percent}}%
+        </h3>
+        <p *ngIf="o.gain.isHigh">Выручка вашего бизнеса вчера на {{o.gain.percent}}% выше среднего: {{o.gain.compare}} руб. в день</p>
+        <p *ngIf="!o.gain.isHigh">Выручка вашего бизнеса вчера на {{o.gain.percent}}% ниже среднего значения: {{o.gain.compare}} руб. в день</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 l6 l3">
+    <div class="card orange lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Заказы:</span>
+        <h3>{{o.orders.yersteday}} зак.</h3>
+        <h3 class="m0 mb1" [ngClass]="{'green-text text-darken-2': o.orders.isHigh, 'red-text': !o.orders.isHigh}">
+          <i class="material-icons">{{o.orders.isHigh ? 'arrow_upward': 'arrow_downward'}}</i>
+          {{o.orders.percent}}%
+        </h3>
+        <p *ngIf="o.orders.isHigh">Число заказов вчера на {{o.orders.percent}}% выше среднего: {{o.orders.compare}} зак. в день</p>
+        <p *ngIf="!o.orders.isHigh">Число заказов вчера на {{o.orders.percent}}% ниже среднего значения: {{o.orders.compare}} зак. в день</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+<div class="tap-target" data-target="menu" #target>
+  <div class="tap-target-content">
+    <h5>Зачем нужна эта страница?</h5>
+    <p>Страница “Обзор” покажет динамику продаж за предыдущий день. Сравнение со средним значениями поможет вам понять, как идут дела у Вашего бизнеса.</p>
+  </div>
+</div>

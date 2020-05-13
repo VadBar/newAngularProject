@@ -1,0 +1,20 @@
+@media screen and (max-width: 600px) {
+  .visible_on_device {
+      display: none;
+  }
+  .visible_on_device_btn {
+    visibility: visible;
+  }
+}
+@media screen and (min-width: 600px) {
+  .visible_on_device_btn {
+    visibility: hidden;
+  }
+}
+.brandLogo {
+  width: 100%;
+  height: 80px;
+  background-image: url("./../../../../theme/img/logo_mini.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+}

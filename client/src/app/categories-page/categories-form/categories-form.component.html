@@ -1,0 +1,56 @@
+<div class="page-title">
+  <h4>
+    <a routerLink="/categories">Категории</a>
+    <i class="material-icons">keyboard_arrow_right</i>
+    {{cat ? 'Редактировать' : 'Добавить'}} категорию
+  </h4>
+  <span>
+    <button class="btn btn-small red modal-trigger" data-target="modal1" (click)="showModal()">
+      <i class="material-icons">delete</i>
+    </button>
+  </span>
+</div>
+<div id="modal1" class="modal" #modal>
+  <div class="modal-content">
+    <h4>Вы уверены что хотите удалить категорию?</h4>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-flat modal-close waves-effect waves-green" (click)="deleteCategory()">Да</button>
+    <button class="btn btn-flat modal-close waves-effect waves-red" (clic)="closeModal()">Нет</button>
+  </div>
+</div>
+<div class="row">
+  <form class="col s12 l6" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="input-field">
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+      >
+      <label for="name">Название</label>
+      <span class="helper-text red-text" *ngIf="form.get('name').invalid && form.get('name').touched">
+        <span *ngIf="form.get('name')['errors']['required']">Имя категории должно быть введено!</span>
+      </span>
+    </div>
+    <div>
+      <input type="file" name="file" class="hidenRealization" #input (change)="uploadFile($event)">
+      <button type="button" class="waves-effect waves-light btn orange lighten-2 mb2" (click)="callInput()">
+        <i class="material-icons left">backup</i>
+        Загрузить изображение
+      </button>
+    </div>
+
+    <div>
+      <button type="submit" [disabled]="form.invalid || form.disabled"  class="waves-effect waves-light btn">
+        Сохранить изменения
+      </button>
+    </div>
+  </form>
+
+  <div class="col s12 l4 center">
+    <img class="responsive-img st"  [src]="previewInf" *ngIf="previewInf">
+  </div>
+</div>
+
+<app-positions-form *ngIf="cat" [categoryId]="cat._id"></app-positions-form>

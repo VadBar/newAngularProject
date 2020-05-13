@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col l3 m5 visible_on_device">
+      <ul class="sidenav sidenav-fixed a-sidenav">
+        <div class="brandLogo"></div>
+        <li class="bold " *ngFor="let link of links" routerLinkActive="active">
+          <a [routerLink]="[link.url]" class="waves-effect waves-orange">{{link.name}}</a>
+        </li>
+        <li class="bold last">
+          <a href="#" class="waves-effect waves-orange" (click)="onLogout($event)">Выйти</a>
+        </li>
+      </ul>
+    </div>
+      <main class="content col l7 m7 s12">
+          <a class=" btn btn-floating btn-large red visible_on_device_btn sidenav-trigger" href="#" (click)="sideOpen()" data-target="slide-out">
+            <i class="menu material-icons">menu</i></a>
+        <router-outlet></router-outlet>
+      </main>
+  </div>
+      <div class="fixed-action-btn" #floatBut>
+        <a class="btn-floating btn-large red">
+          <i class="large material-icons">add</i>
+        </a>
+        <ul>
+          <li>
+            <a class="btn-floating green" routerLink="/order"><i class="material-icons">assignment</i></a>
+          </li>
+          <li><a class="btn-floating blue" routerLink="/categories/new"><i class="material-icons">list</i></a></li>
+        </ul>
+      </div>
+<div>
+  <ul class="sidenav"  #side_h id="slide-out">
+    <div class="brandLogo"></div>
+    <li class="bold " *ngFor="let link of links" routerLinkActive="active">
+      <a [routerLink]="[link.url]" (click)="sideClose()" class="waves-effect waves-orange">{{link.name}}</a>
+    </li>
+    <li class="bold last">
+      <a href="#" class="waves-effect waves-orange" (click)="onLogout($event)">Выйти</a>
+    </li>
+  </ul>
+</div>
+
